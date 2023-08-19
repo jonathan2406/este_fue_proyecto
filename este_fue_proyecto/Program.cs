@@ -10,6 +10,7 @@ namespace practica_1
         static void Main()
         {
             //Pruebas
+            //Hola
             Casa casa_1 = new Casa(5, 5);
             casa_1.MostrarMatriz();
             Habitacion habitacion_1 = new Habitacion("eo");

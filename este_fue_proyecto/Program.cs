@@ -21,7 +21,7 @@ namespace practica_1
         }
     }
 
-    class Casaita
+    class Perra
     {
         int filas; //dgksdbvksdbnfskldjfgbsdnvoefvfggdfgdfgdfg
         int columnas;

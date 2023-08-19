@@ -9,8 +9,7 @@ namespace practica_1
     {
         static void Main()
         {
-            //Pruebas
-            //Hola
+
             Casa casa_1 = new Casa(5, 5);
             casa_1.MostrarMatriz();
             Habitacion habitacion_1 = new Habitacion("eo");
@@ -21,9 +20,9 @@ namespace practica_1
         }
     }
 
-    class Perra
+    class Casa
     {
-        int filas; //dgksdbvksdbnfskldjfgbsdnvoefvfggdfgdfgdfg
+        int filas;
         int columnas;
         public Habitacion[,] matriz;
 
@@ -82,19 +81,5 @@ namespace practica_1
             this.ejemplo = testo;
         }
     }
-    class hp
-    {
-        /*
-         
-    
 
-
-
-
-        edfedf
-        eo
-
-
-
-        */
 }

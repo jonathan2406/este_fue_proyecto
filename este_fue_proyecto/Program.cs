@@ -21,9 +21,9 @@ namespace practica_1
         }
     }
 
-    class Casa
+    class Casaita
     {
-        int filas;
+        int filas; //dgksdbvksdbnfskldjfgbsdnvoefvfggdfgdfgdfg
         int columnas;
         public Habitacion[,] matriz;
 
@@ -82,4 +82,19 @@ namespace practica_1
             this.ejemplo = testo;
         }
     }
+    class hp
+    {
+        /*
+         
+    
+
+
+
+
+
+        eo
+
+
+
+        */
 }

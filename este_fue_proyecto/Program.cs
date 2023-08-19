@@ -21,7 +21,7 @@ namespace practica_1
         }
     }
 
-    class Casa
+    class Perra
     {
         int filas;
         int columnas;

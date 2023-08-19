@@ -56,7 +56,7 @@ namespace practica_1
 
         public void ModificarValor(int fila, int columna, Habitacion nuevoValor)
         {
-            if (matriz[fila,columna] == null)
+            if (matriz[fila,columna] == null)// snckafkjdcbadf dffdwf
             {
                 if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas)
                 {

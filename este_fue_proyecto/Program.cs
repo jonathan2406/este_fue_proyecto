@@ -15,7 +15,7 @@ namespace este_fue_proyecto
             {
                 Console.WriteLine("es nulo");
             }
-            /*
+            
 
             Habitacion habitacion1 = new Habitacion("Sala", 20);
             Habitacion habitacion2 = new Habitacion("Dormitorio", 15);
@@ -39,12 +39,12 @@ namespace este_fue_proyecto
             habitacion1.AgregarMueble(sofa);
 
             Console.WriteLine("-----------------------------------");
-            
-
+           
+           
             habitacion1.mostrar_muebles();
 
             Console.WriteLine($"Estado de lámpara: {lampara.GetEstado()}");
-
+            
             
             persona1.meter(habitacion1);
 
@@ -55,8 +55,6 @@ namespace este_fue_proyecto
 
             Console.WriteLine("------------------------------------------");
 
-
-            casa.MostrarMatriz();
 
             Console.WriteLine("------------------------------------------");
 

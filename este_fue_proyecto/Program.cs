@@ -10,7 +10,12 @@ namespace este_fue_proyecto
     {
         static void Main()
         {
-            Casa casa = new Casa(2, 2);
+            Casa casita_1 = new Casa(2, 2);
+            if (casita_1.get_plano()[1,1] == null)
+            {
+                Console.WriteLine("es nulo");
+            }
+            /*
 
             Habitacion habitacion1 = new Habitacion("Sala", 20);
             Habitacion habitacion2 = new Habitacion("Dormitorio", 15);

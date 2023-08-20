@@ -16,7 +16,7 @@ namespace este_fue_proyecto
         {
             this.filas = filas;
             this.columnas = columnas;
-            this.matriz = new Habitacion[filas, columnas];
+            matriz = new Habitacion[filas, columnas];
         }
 
         public void MostrarMatriz()
@@ -56,6 +56,16 @@ namespace este_fue_proyecto
             {
                 Console.WriteLine("ya hay una habitacion en esa posicion.");
             }
+        }
+        public Habitacion[,] get_plano()
+        {
+            return matriz;
+        }
+        public void expandir_plano(int fila, int columna)
+        {
+            Habitacion[,] vieja_matriz = matriz;
+            Habitacion[,] nueva_matriz = new Habitacion[fila, columna];
+            foreach (
         }
     }
 }

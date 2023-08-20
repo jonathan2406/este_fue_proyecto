@@ -9,7 +9,7 @@ namespace este_fue_proyecto
 {
     internal class CleanCode
     {
-        public List<Remodelador> lista_remodeladores = new List<Remodelador> ();
+        protected List<Remodelador> lista_remodeladores = new List<Remodelador> ();
         int numero_trabajadores;
         
         public CleanCode(int n_trabajadores)
@@ -24,7 +24,7 @@ namespace este_fue_proyecto
         }
         void crear_trabajadores()
         {
-            for (int i = 0; i <= numero_trabajadores; i++)
+            for (int i = 1; i <= numero_trabajadores; i++)
             {
                 Remodelador remodelador_i = new Remodelador();
                 meter_lista_trabajadores(remodelador_i);

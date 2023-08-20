@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace este_fue_proyecto
 {
-    internal class Lamapra
+    public class Lampara : Muebles
     {
+        public Lampara(string nombre, double precio) : base(nombre, precio)
+        {
+
+        }
     }
 }

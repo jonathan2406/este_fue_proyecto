@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 
-namespace practica_1
+namespace este_fue_proyecto
 {
     class Program
     {

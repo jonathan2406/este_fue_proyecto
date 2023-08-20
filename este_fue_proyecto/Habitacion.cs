@@ -54,12 +54,31 @@ namespace este_fue_proyecto
                 Console.WriteLine($"No hay habitantes en {Nombre}.");
             }
         }
+        public void AgregarMueble(Muebles mueble)
+        {
+            lista_muebles.Add(mueble);
+            Console.WriteLine($"{mueble.Nombre} ha sido agregado a: {Nombre}.");
+
+        }
 
         public void mostrar_muebles()
         {
+            if (lista_muebles.Count > 0)
+            {
+                Console.WriteLine($"Muebles en {Nombre}:");
+                foreach (Muebles mueble in lista_muebles)
+                {
+                    Console.WriteLine(mueble.Nombre);
+                }
+            }
+            else
+            {
+                Console.WriteLine($"No hay muebles en {Nombre}.");
+            }
+
             foreach (Muebles mueble in lista_muebles)
             {
-                Console.WriteLine($"El mueble es: {mueble.Nombre}");
+                Console.WriteLine($"{mueble.Nombre} - Estado: {(mueble.GetEstado() ? "Bueno" : "Malísimo")}");
             }
         }
 
@@ -76,7 +95,7 @@ namespace este_fue_proyecto
         public void AgregarPersona(Persona persona)
         {
             lista_personas.Add(persona);
-            Console.WriteLine($"{persona.Nombre} ha sido agregado a: {Nombre}");
+
         }
 
         public void QuitarPersona(Persona persona)

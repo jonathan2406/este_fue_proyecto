@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace este_fue_proyecto
 {
-    internal class Sofa
+    public class Sofa : Muebles
     {
+        public Sofa(string nombre, double precio) : base (nombre, precio) 
+        { 
+
+        }   
     }
 }

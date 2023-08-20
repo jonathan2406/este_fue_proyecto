@@ -1,4 +1,5 @@
-﻿using System;
+﻿using este_fue_proyecto;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
@@ -9,76 +10,28 @@ namespace practica_1
     {
         static void Main()
         {
+            Casa casa = new Casa(2, 2);
 
-            Casa casa_1 = new Casa(5, 5);
-            casa_1.MostrarMatriz();
-            Habitacion habitacion_1 = new Habitacion("eo");
-            casa_1.ModificarValor(1, 1, habitacion_1);
-            casa_1.MostrarMatriz();
-            casa_1.ModificarValor(1, 1, habitacion_1);
+            Habitacion habitacion1 = new Habitacion("Sala", 20);
+            Habitacion habitacion2 = new Habitacion("Dormitorio", 15);
 
-        }
-    }
+            Persona persona1 = new Persona("Lasso");
+            Persona persona2 = new Persona("Maradona");
 
-    class Casa
-    {
-        int filas;
-        int columnas;
-        public Habitacion[,] matriz;
+            persona1.meter(habitacion1);
+            persona2.meter(habitacion2);
 
-        public Casa(int filas, int columnas)
-        {
-            this.filas = filas;
-            this.columnas = columnas;
-            this.matriz = new Habitacion[filas, columnas];
-        }
+            casa.MostrarMatriz();
 
-        public void MostrarMatriz()
-        {
-            for (int i = 0; i < filas; i++)
-            {
-                for (int j = 0; j < columnas; j++)
-                {
-                    if (matriz[i, j] != null)
-                    {
-                        Console.Write(matriz[i, j] + " ");
-                    }
-                    else
-                    {
-                        Console.Write("vacio! ");
-                    }
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine();
-        }
+            persona2.meter(habitacion1);
 
-        public void ModificarValor(int fila, int columna, Habitacion nuevoValor)
-        {
-            if (matriz[fila,columna] == null)// snckafkjdcbadf dffdwf
-            {
-                if (fila >= 0 && fila < filas && columna >= 0 && columna < columnas)
-                {
-                    this.matriz[fila, columna] = nuevoValor;
-                }
-                else
-                {
-                    Console.WriteLine("Posición fuera de los límites de la matriz.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("ya hay una habitacion en esa posicion.");
-            }
-        }
-    }
-    class Habitacion
-    {
 
-        string ejemplo;
-        public Habitacion(string testo)
-        {
-            this.ejemplo = testo;
+            Console.WriteLine("--------------------------------------");
+
+
+            habitacion1.mostrar_personas();
+
+
         }
     }
 

@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace este_fue_proyecto
 {
-    internal class Habitante
+    public class Habitante : Persona
     {
+        public Habitacion HabitacionAsignada { get; set; } 
+
+        public Habitante(string nombre) : base(nombre) 
+        {
+
+        }  
+
+        public void PeticionIntervencion()
+        {
+                    
+        }
+
     }
+
 }

@@ -6,7 +6,29 @@ using System.Threading.Tasks;
 
 namespace este_fue_proyecto
 {
-    internal class Persona
+    public class Persona
     {
+        public string Nombre { get; set; }
+        public Habitacion HabitacionAsignada { get; private set; }
+
+        public Persona(string nombre)
+        {
+            Nombre = nombre;
+        }
+
+        public void meter(Habitacion habitacion)
+        {
+            habitacion.AgregarPersona(this);
+            Console.WriteLine($"{Nombre} ha sido agregado a: {habitacion.Nombre}");
+
+        }
+
+        public void quitar(Habitacion habitacion)
+        {
+            habitacion.QuitarPersona(this);
+            Console.WriteLine($"{Nombre} se ha quitado de: {habitacion.Nombre}");
+           
+
+        }
     }
 }

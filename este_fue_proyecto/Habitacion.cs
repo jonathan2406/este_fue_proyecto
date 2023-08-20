@@ -12,7 +12,7 @@ namespace este_fue_proyecto
         public string Nombre { get; set; }
         public double Area { get; set; }
         private List<Muebles> lista_muebles;
-        private List<Persona> lista_personas;
+        protected List<Persona> lista_personas;
         private Habitante habitante_principal;
  
 
@@ -112,6 +112,16 @@ namespace este_fue_proyecto
                 Console.WriteLine($"{persona.Nombre} no se encuentra en la habitación.");
             }
         }
-        
+        public bool verificar_ocupacion()
+        {
+            if (lista_personas.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

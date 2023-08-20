@@ -39,7 +39,8 @@ namespace este_fue_proyecto
             habitacion1.mostrar_muebles();
 
             Console.WriteLine($"Estado de lámpara: {lampara.GetEstado()}");
-            /*
+
+            
             persona1.meter(habitacion1);
 
             Console.WriteLine("------------------------------------------");
@@ -71,7 +72,7 @@ namespace este_fue_proyecto
             Console.WriteLine("------------------------------------------");
 
             habitacion1.mostrar_muebles();
-            */
+            
         }
     }
 

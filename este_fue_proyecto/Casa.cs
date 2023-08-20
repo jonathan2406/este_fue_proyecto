@@ -8,7 +8,7 @@ namespace este_fue_proyecto
 {
     class Casa
     {
-        int filas;
+        public int filas;
         int columnas;
         public Habitacion[,] matriz;
 
@@ -66,7 +66,17 @@ namespace este_fue_proyecto
         {
             Habitacion[,] vieja_matriz = matriz;
             Habitacion[,] nueva_matriz = new Habitacion[fila, columna];
-            foreach (
+            for (int i = 0; i < vieja_matriz.GetLength(0); i++)
+            {
+                for (int j = 0; j < vieja_matriz.GetLength(1);j ++)
+                {
+                    nueva_matriz[i, j] = vieja_matriz[i, j];
+                }
+            }
+            matriz = nueva_matriz;
+            filas = nueva_matriz.GetLength(0);
+            columnas = nueva_matriz.GetLength(1);
+
         }
         */
     }

@@ -11,12 +11,17 @@ namespace este_fue_proyecto
         static void Main()
         {
             Casa casita_1 = new Casa(2, 2);
-            if (casita_1.get_plano()[1,1] == null)
-            {
-                Console.WriteLine("es nulo");
-            }
-            
+            CleanCode empresa = new CleanCode(5);
+            Habitacion cuarto = new Habitacion("cuarto", 10);
+            casita_1.ModificarValor(1,1,cuarto);
+            casita_1.MostrarMatriz();
+            Console.WriteLine(casita_1.get_plano().GetLength(0));
+            casita_1.expandir_plano(10,4);
+            casita_1.MostrarMatriz();
+            Console.WriteLine(casita_1.get_plano().GetLength(1));
+            Console.WriteLine(casita_1.filas);
 
+            /*
             Habitacion habitacion1 = new Habitacion("Sala", 20);
             Habitacion habitacion2 = new Habitacion("Dormitorio", 15);
 

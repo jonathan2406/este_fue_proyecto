@@ -27,12 +27,15 @@ namespace este_fue_proyecto
         {
             costo_hora = nuevo_valor;
         }
-        /*void añadir_habitacion(Casa casa,int fila, int columna, int metros)
+        void añadir_habitacion(Casa casa,int fila, int columna, int metros)
         {
-            if (casa.get_plano()[fila][columna] ==  )
+            for (int i = 1; i < metros; i++)
             {
-                Console.WriteLine();
+                if (casa.get_plano()[fila,columna] == null )
+                    {
+                        Console.WriteLine();
+                    }
             }
-        }*/
+        }
     }
 }

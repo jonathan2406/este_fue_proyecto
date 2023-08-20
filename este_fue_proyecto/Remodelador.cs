@@ -27,5 +27,16 @@ namespace este_fue_proyecto
         {
             costo_hora = nuevo_valor;
         }
+        void añadir_habitacion(Habitacion habitacion, int fila, int columna, int metros)
+        {
+            try
+            {
+
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

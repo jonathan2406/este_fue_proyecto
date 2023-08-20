@@ -14,7 +14,7 @@ namespace este_fue_proyecto
         private List<Muebles> lista_muebles;
         private List<Persona> lista_personas;
         private Habitante habitante_principal;
-
+        //Mmgvaso
 
         public Habitacion(string nombre, double area)
         {

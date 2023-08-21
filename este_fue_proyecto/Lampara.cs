@@ -10,7 +10,7 @@ namespace este_fue_proyecto
     {
         public Lampara(string nombre, double precio) : base(nombre, precio)
         {
-
+            SetEstadoAleatorio();
         }
     }
 }

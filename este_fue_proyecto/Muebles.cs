@@ -29,6 +29,12 @@ namespace este_fue_proyecto
             estado = nuevoEstado;
         }
 
+        public void SetEstadoAleatorio()
+        {
+            Random random = new Random();
+            estado = random.NextDouble() < 0.5;
+        }
+
         public double GetCosto()
         {
             return costo;

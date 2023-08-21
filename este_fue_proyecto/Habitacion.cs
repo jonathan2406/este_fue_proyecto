@@ -47,7 +47,7 @@ namespace este_fue_proyecto
                 Console.WriteLine($"Habitantes en {Nombre}:");
                 foreach (Persona persona in lista_personas)
                 {
-                    Console.WriteLine(persona.Nombre);
+                    Console.WriteLine($"-- {persona.Nombre}");
                 }
             }
             else
@@ -69,7 +69,7 @@ namespace este_fue_proyecto
                 Console.WriteLine($"Muebles en {Nombre}:");
                 foreach (Muebles mueble in lista_muebles)
                 {
-                    Console.WriteLine(mueble.Nombre);
+                    Console.WriteLine($"-- {mueble.Nombre}");
                 }
             }
             else
@@ -79,8 +79,14 @@ namespace este_fue_proyecto
 
             foreach (Muebles mueble in lista_muebles)
             {
-                Console.WriteLine($"{mueble.Nombre} - Estado: {(mueble.GetEstado() ? "Bueno" : "Malísimo")}");
+                
+                Console.WriteLine($"-- {mueble.Nombre} - Estado: {(mueble.GetEstado() ? "Bueno" : "Malísimo")}");
             }
+        }
+
+        public List<Muebles> GetMuebles()
+        {
+            return lista_muebles;
         }
 
         public double get_medidas()

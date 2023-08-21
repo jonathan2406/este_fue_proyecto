@@ -28,7 +28,8 @@ namespace este_fue_proyecto
             casita_1.MostrarMatriz();
 
 
-            /*
+            
+            
             Habitacion habitacion1 = new Habitacion("Sala", 20);
             Habitacion habitacion2 = new Habitacion("Dormitorio", 15);
 
@@ -38,6 +39,9 @@ namespace este_fue_proyecto
             Lampara lampara = new Lampara("Lampara de mesa", 50);
             Cama cama = new Cama("La mejor cama de todo el mundo", 444);
             Sofa sofa = new Sofa("Sofa.", 4);
+
+            Remodelador remodelador = new Remodelador();
+
 
             habitacion1.AgregarMueble(lampara);
 
@@ -51,43 +55,41 @@ namespace este_fue_proyecto
             habitacion1.AgregarMueble(sofa);
 
             Console.WriteLine("-----------------------------------");
-            
-
+           
+          
             habitacion1.mostrar_muebles();
 
-            Console.WriteLine($"Estado de lámpara: {lampara.GetEstado()}");
+            Console.WriteLine("---------------------------------------------");
+
+
+            Console.WriteLine("----------------------------------------------------");
+                
             persona1.meter(habitacion1);
 
             Console.WriteLine("------------------------------------------");
 
-
-            persona2.meter(habitacion2);
-
-            Console.WriteLine("------------------------------------------");
-
-
-            casa.MostrarMatriz();
-
-            Console.WriteLine("------------------------------------------");
-
-            persona2.meter(habitacion1);
-
-
-            Console.WriteLine("--------------------------------------");
-
-
             habitacion1.mostrar_personas();
 
-            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------");
+
+            TimeSpan tiempo_reaccion = remodelador.calcular_tiempo_arreglo_habitacion(habitacion1);
+            Console.WriteLine($"Tiempo estimado de reparación: {tiempo_reaccion.TotalSeconds} segundos.");
+
+            remodelador.reparar_habitacion(habitacion1);
 
 
+            Console.WriteLine("----------------------------------------------------------------");
 
-                 habitacion2.mostrar_personas();
-
-            Console.WriteLine("------------------------------------------");
 
             habitacion1.mostrar_muebles();
-            */
+
+            Console.WriteLine("------------------------------------------------------------------");
+
+            persona1.quitar(habitacion1);
+
+            
+            
+            
         }
     }
 

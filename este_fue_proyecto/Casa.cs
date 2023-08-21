@@ -61,6 +61,7 @@ namespace este_fue_proyecto
         {
             return matriz;
         }
+        
         public void expandir_plano(int fila, int columna)
         {
             Habitacion[,] vieja_matriz = matriz;

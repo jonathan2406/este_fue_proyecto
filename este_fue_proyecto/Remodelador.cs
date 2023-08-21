@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,14 +29,44 @@ namespace este_fue_proyecto
         {
             costo_hora = nuevo_valor;
         }
-        void añadir_habitacion(Casa casa,int fila, int columna, int metros)
+        public void añadir_habitacion(string nombre_habitacion, Casa casa, int fila, int columna, int metros, bool verificador = true)
         {
-            for (int i = 1; i < metros; i++)
+            int metros_originales = metros;
+            for (int i = 0; i < metros; i++)
             {
-                if (casa.get_plano()[fila,columna] == null )
+                if (metros > 0)
+                {
+                    if (casa.get_plano().GetLength(0) - 1 < fila || casa.get_plano().GetLength(1) - 1 < columna)
                     {
-                        Console.WriteLine();
+                        casa.expandir_plano(fila + i, columna + i);
                     }
+                    try
+                    {
+                        if (casa.Trabajar_trabajant(fila, columna + i) == true && verificador == true)
+                        {
+                            metros = metros - 10;
+                            verificador = false;
+                            Habitacion nueva_habitacion = new Habitacion(nombre_habitacion, metros_originales);
+                            casa.ModificarValor(fila, columna + i, nueva_habitacion);
+                        }
+                        else if (casa.Trabajar_trabajant(fila, columna + i) == true && verificador == false)
+                        {
+                            metros = metros - 10;
+                            casa.ModificarValor(fila, columna + i, casa.get_plano()[fila, columna + i - 1]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("error!!!, se detecto gente en una habitacion adyacente, porfavor muevalos antes de añadir una habitacion con sus especificaciones");
+                            break;
+                        }
+                    }
+                    catch
+                    {
+                        casa.expandir_plano(fila, columna + i);
+                        i -= 1;
+                    }
+
+                }
             }
         }
     }

@@ -10,16 +10,23 @@ namespace este_fue_proyecto
     {
         static void Main()
         {
-            Casa casita_1 = new Casa(2, 2);
+            Casa casita_1 = new Casa(5,5);
             CleanCode empresa = new CleanCode(5);
             Habitacion cuarto = new Habitacion("cuarto", 10);
-            casita_1.ModificarValor(1,1,cuarto);
+            Habitante pepe = new Habitante("pepe");
+            pepe.meter(cuarto);
+            Console.WriteLine(cuarto.lista_personas);
+            Console.WriteLine(cuarto.verificar_ocupacion());
+            Console.WriteLine(cuarto.lista_personas.Count);
             casita_1.MostrarMatriz();
-            Console.WriteLine(casita_1.get_plano().GetLength(0));
-            casita_1.expandir_plano(10,4);
+            casita_1.ModificarValor(0, 0, cuarto);
             casita_1.MostrarMatriz();
-            Console.WriteLine(casita_1.get_plano().GetLength(1));
-            Console.WriteLine(casita_1.filas);
+            Console.WriteLine(casita_1.Trabajar_trabajant(2,0));
+            empresa.get_lista_remodeladores()[0].añadir_habitacion("cuarto", casita_1, 10,10,15);
+            casita_1.MostrarMatriz();
+            empresa.get_lista_remodeladores()[0].añadir_habitacion("cuarto", casita_1, 10,8, 25);
+            casita_1.MostrarMatriz();
+
 
             /*
             Habitacion habitacion1 = new Habitacion("Sala", 20);

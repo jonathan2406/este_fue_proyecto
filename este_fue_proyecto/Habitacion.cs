@@ -12,8 +12,9 @@ namespace este_fue_proyecto
         public string Nombre { get; set; }
         public double Area { get; set; }
         private List<Muebles> lista_muebles;
-        protected List<Persona> lista_personas;
+        public List<Persona> lista_personas;
         private Habitante habitante_principal;
+ 
  
 
         public Habitacion(string nombre, double area)

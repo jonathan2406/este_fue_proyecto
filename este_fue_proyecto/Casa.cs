@@ -10,6 +10,7 @@ namespace este_fue_proyecto
         public int filas;
         public int columnas;
         public Habitacion[,] matriz;
+        public Habitacion[,] matriz_vieja;
 
         public Casa(int filas, int columnas)
         {
@@ -74,34 +75,6 @@ namespace este_fue_proyecto
             matriz = nueva_matriz;
             filas = nueva_matriz.GetLength(0);
             columnas = nueva_matriz.GetLength(1);
-        }
-        public void añade_columna()
-        {
-            Habitacion[,] vieja_matriz = matriz;
-            Habitacion[,] nueva_matriz = new Habitacion[filas,columnas+1];
-            for (int i = 0; i < vieja_matriz.GetLength(0); i++)
-            {
-                for (int j = 0; j < vieja_matriz.GetLength(1); j++)
-                {
-                    nueva_matriz[i, j] = vieja_matriz[i, j];
-                }
-            }
-            matriz = nueva_matriz;
-            columnas = nueva_matriz.GetLength(1);
-        }
-        public void añade_fila()
-        {
-            Habitacion[,] vieja_matriz = matriz;
-            Habitacion[,] nueva_matriz = new Habitacion[filas+1, columnas];
-            for (int i = 0; i < vieja_matriz.GetLength(0); i++)
-            {
-                for (int j = 0; j < vieja_matriz.GetLength(1); j++)
-                {
-                    nueva_matriz[i, j] = vieja_matriz[i, j];
-                }
-            }
-            matriz = nueva_matriz;
-            filas = nueva_matriz.GetLength(0);
         }
 
         public bool Trabajar_trabajant(int fila, int columna)

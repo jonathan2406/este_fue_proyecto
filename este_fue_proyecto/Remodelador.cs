@@ -57,6 +57,9 @@ namespace este_fue_proyecto
                         else
                         {
                             Console.WriteLine("error!!!, se detecto gente en una habitacion adyacente, porfavor muevalos antes de añadir una habitacion con sus especificaciones");
+                            casa.matriz = casa.matriz_vieja;
+                            casa.filas = casa.get_plano().GetLength(0);
+                            casa.columnas = casa.get_plano().GetLength(1);
                             break;
                         }
                     }
@@ -66,6 +69,9 @@ namespace este_fue_proyecto
                         i -= 1;
                     }
 
+                }else
+                {
+                    casa.matriz_vieja = casa.matriz;
                 }
             }
         }

@@ -26,7 +26,7 @@ namespace este_fue_proyecto
         {
             for (int i = 1; i <= numero_trabajadores; i++)
             {
-                Remodelador remodelador_i = new Remodelador();
+                Remodelador remodelador_i = new Remodelador($"remodelador_{i}");
                 meter_lista_trabajadores(remodelador_i);
             }
         }

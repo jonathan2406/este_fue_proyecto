@@ -130,5 +130,9 @@ namespace este_fue_proyecto
                 return true;
             }
         }
+        public string get_nombre()
+        {
+            return Nombre;
+        }
     }
 }

@@ -33,51 +33,8 @@ namespace este_fue_proyecto
         }
         void trabajador_añadir_habitacion(Casa casa, string nombre_habitacion, int fila, int columna, int metros)
         {
-            int metros_originales = metros;
-            for (int i = 0; i < metros; i++)
-            {
-                if (metros > 0)
-                {
-                    if (casa.get_plano().GetLength(0) - 1 < fila || casa.get_plano().GetLength(1) - 1 < columna)
-                    {
-                        casa.expandir_plano(fila + i, columna + i);
-                    }
-                    try
-                    {
-                        if (casa.Trabajar_trabajant(fila, columna + i) == true && verificador == true)
-                        {
-                            metros = metros - 10;
-                            verificador = false;
-                            Habitacion nueva_habitacion = new Habitacion(nombre_habitacion, metros_originales);
-                            casa.ModificarValor(fila, columna + i, nueva_habitacion);
-                        }
-                        else if (casa.Trabajar_trabajant(fila, columna + i) == true && verificador == false)
-                        {
-                            metros = metros - 10;
-                            casa.ModificarValor(fila, columna + i, casa.get_plano()[fila, columna + i - 1]);
-                        }
-                        else
-                        {
-                            Console.WriteLine("error!!!, se detecto gente en una habitacion adyacente, porfavor muevalos antes de añadir una habitacion con sus especificaciones");
-                            casa.matriz = casa.matriz_vieja;
-                            casa.filas = casa.get_plano().GetLength(0);
-                            casa.columnas = casa.get_plano().GetLength(1);
-                            break;
-                        }
-                    }
-                    catch
-                    {
-                        casa.expandir_plano(fila, columna + i);
-                        i -= 1;
-                    }
-
-                }else
-                {
-                    casa.matriz_vieja = casa.matriz;
-                }
-            }
         }
-
+  
         public void reparar_habitacion(Habitacion habitacion)
         {
             List<Muebles> mueblesPorArreglar = new List<Muebles>();

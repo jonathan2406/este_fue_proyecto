@@ -64,7 +64,7 @@ namespace este_fue_proyecto
                 }
                 if (numero_decision == 1)
                 {
-
+                    Console.WriteLine("ingrese c");
                 }
 
             }

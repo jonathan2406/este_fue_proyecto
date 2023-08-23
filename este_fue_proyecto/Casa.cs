@@ -110,8 +110,6 @@ namespace este_fue_proyecto
             if (matriz.GetLength(0)-1  < fila || matriz.GetLength(1)-1  < columna)
             {
                 expandir_plano(fila, columna);
-                Console.WriteLine("se expandio");
-                MostrarMatriz();
             }
 
             if (Trabajar_trabajant(fila, columna) == true)

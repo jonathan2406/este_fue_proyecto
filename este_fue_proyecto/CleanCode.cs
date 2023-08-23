@@ -34,5 +34,40 @@ namespace este_fue_proyecto
         {
             return lista_remodeladores;
         }
+        public void menu(Casa casa, Habitante persona_solicitante)
+        {
+            int costo_trabajo = 0;
+            Console.WriteLine("Bienvenido a intervenciones clean code");
+            Console.WriteLine("--------------------------------------------");
+
+            primer_while:
+            while (true)
+            {
+                Console.WriteLine("Que servicio quiere realizar? \n ");
+                Console.WriteLine("presione 1 para contruir una habitacion............" +
+                    "\npresione 2 para ampliar una habitacion............" +
+                    "\npresione 3 para decorar habitacion............" +
+                    "\npresione 4 para reparar habitacion............" +
+                    "\n presione 5 para salir----------------\n");
+                string decision = Console.ReadLine();
+                if (int.TryParse(decision, out int numero_decision) && numero_decision == 1 || numero_decision == 2 || numero_decision == 3 || numero_decision == 4 || numero_decision == 5)
+                {
+                    if (numero_decision == 5)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("ingrese un numero valido porfavor");
+                    goto primer_while;
+                }
+
+            }
+        }
     }
 }

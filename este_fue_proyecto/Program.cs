@@ -14,7 +14,7 @@ namespace este_fue_proyecto
             CleanCode empresa = new CleanCode(10);
             Habitante pepe = new Habitante("pepe");
             Casa casita = new Casa(3, 3);
-            empresa.cotizacion(casita, pepe);
+            empresa.menu(casita, pepe);
         }
     }
 

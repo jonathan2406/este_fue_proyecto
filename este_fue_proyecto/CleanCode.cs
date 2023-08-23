@@ -34,9 +34,15 @@ namespace este_fue_proyecto
         {
             return lista_remodeladores;
         }
+        
+        
+        
+        
+        
         public void menu(Casa casa, Habitante persona_solicitante)
         {
             int costo_trabajo = 0;
+            int acumulador_horas;
             Console.WriteLine("Bienvenido a intervenciones clean code");
             Console.WriteLine("--------------------------------------------");
 
@@ -64,7 +70,16 @@ namespace este_fue_proyecto
                 }
                 if (numero_decision == 1)
                 {
-                    Console.WriteLine("ingrese c");
+                    Console.WriteLine("nombre que desea poner a la habitacion:       ");
+                    string nombre_habitacion = Console.ReadLine();
+                    Console.WriteLine("\ningrese el numero de la fila donde desea poner:    ");
+                    int fila = int.Parse(Console.ReadLine());
+                    Console.WriteLine("\ningrese el numero de columna donde desea poner:    ");
+                    int columna = int.Parse(Console.ReadLine());
+                    Console.WriteLine("\ningrese el numero de metros que desea la habitacion:     ");
+                    int metros = int.Parse(Console.ReadLine());
+
+
                 }
 
             }

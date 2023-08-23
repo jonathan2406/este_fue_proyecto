@@ -47,7 +47,7 @@ namespace este_fue_proyecto
                 {
                     if (matriz[i, j] != null)
                     {
-                        Console.Write(matriz_vieja[i, j] + " ");
+                        Console.Write(matriz_vieja[i, j].get_nombre() + " ");
                     }
                     else
                     {
@@ -209,27 +209,49 @@ namespace este_fue_proyecto
                     {
                         if (matriz.GetLength(1)-1 == columna_encontrada+j && Trabajar_trabajant(fila_encontrada, columna_encontrada+j) == true)
                         {
-                            Console.WriteLine("entro por el primer if");
                             añadir_nueva_columna(columna_encontrada + j);
                             matriz[fila_encontrada, columna_encontrada + j] = habitacion_amplear;
                         }
+                        else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && matriz[fila_encontrada, columna_encontrada + j + 1] == null)
+                        {
+                            matriz[fila_encontrada, columna_encontrada + j + 1] = habitacion_amplear;
+                        }
                         else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && matriz[fila_encontrada, (columna_encontrada + j)+1] != null)
                         {
-                            Console.WriteLine(" entro por el segundo if");
                             if (columna_encontrada + j + 1 == matriz.GetLength(1) - 1)
                             {
                                 añadir_nueva_columna(columna_encontrada + j + 1);
                             }
-                            else if (matriz[fila_encontrada, (columna_encontrada + j) +2 ] == null)
+                            else
                             {
-                                matriz[fila_encontrada, columna_encontrada + j + 2] = matriz[fila_encontrada, (columna_encontrada + j) + 1];
-                                matriz[fila_encontrada, (columna_encontrada + j) + 1] = null;
+                                bool verificador = false;
+                                for (int ñ = columna_encontrada + j; ñ < matriz.GetLength(1); ñ++)
+                                {
+                                    if (matriz[fila_encontrada, ñ] == null)
+                                    {
+                                        List<Habitacion> contenedor = new List<Habitacion> { };
+                                        for (int k = columna_encontrada + j + 1; k < ñ; k++)
+                                        {
+                                            contenedor.Add(matriz[fila_encontrada, k]);
+                                        }
+                                        for (int y = columna_encontrada + j + 2, pasador = 0; y <= ñ; y++, pasador++)
+                                        {
+                                            matriz[fila_encontrada, y] = contenedor[pasador];
+                                        }
+                                        matriz[fila_encontrada, columna_encontrada + j + 1] = null;
+                                        verificador = true;
+                                        break;
+                                    }
+                                }
+                                if (verificador == false)
+                                {
+                                    añadir_nueva_columna(matriz.GetLength(1) - 1);
+                                    j -= 1;
+                                }
                             }
-                            añadir_nueva_columna(columna_encontrada + j + 1);
                         }
-                        else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && matriz[fila_encontrada, (columna_encontrada) + 1 + j] == null)
+                        if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && matriz[fila_encontrada, (columna_encontrada) + 1 + j] == null)
                         {
-                            Console.WriteLine("entro  por el tercer if");
                             matriz[fila_encontrada, columna_encontrada + j + 1] = habitacion_amplear;
                         }
                         if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == false)
@@ -258,13 +280,14 @@ namespace este_fue_proyecto
             }
         }
 
+
         public bool Trabajar_trabajant(int fila, int columna)
         {
             if (fila == 0)
             {
                 if (columna == 0)
                 {
-                    if ((matriz[fila + 1, columna] == null || matriz[fila + 1, columna].verificar_ocupacion() == true) && 
+                    if ((matriz[fila + 1, columna] == null || matriz[fila + 1, columna].verificar_ocupacion() == true) &&
                         (matriz[fila, columna + 1] == null || matriz[fila, columna + 1].verificar_ocupacion() == true))
                     {
                         return true;
@@ -276,9 +299,9 @@ namespace este_fue_proyecto
 
                 }
 
-                else if (columna == matriz.GetLength(1)-1)
+                else if (columna == matriz.GetLength(1) - 1)
                 {
-                    if ((matriz[fila + 1, columna] == null || matriz[fila + 1, columna].verificar_ocupacion() == true) && 
+                    if ((matriz[fila + 1, columna] == null || matriz[fila + 1, columna].verificar_ocupacion() == true) &&
                         (matriz[fila, columna - 1] == null || matriz[fila, columna - 1].verificar_ocupacion() == true))
                     {
                         return true;
@@ -290,8 +313,8 @@ namespace este_fue_proyecto
                 }
                 else if (columna > 0)
                 {
-                    if ((matriz[fila + 1, columna] == null || matriz[fila + 1, columna].verificar_ocupacion() == true) && 
-                        (matriz[fila, columna + 1] == null || matriz[fila, columna + 1].verificar_ocupacion() == true) && 
+                    if ((matriz[fila + 1, columna] == null || matriz[fila + 1, columna].verificar_ocupacion() == true) &&
+                        (matriz[fila, columna + 1] == null || matriz[fila, columna + 1].verificar_ocupacion() == true) &&
                         (matriz[fila, columna - 1] == null || matriz[fila, columna - 1].verificar_ocupacion() == true))
                     {
                         return true;
@@ -302,11 +325,11 @@ namespace este_fue_proyecto
                     }
                 }
             }
-            if (fila == matriz.GetLength(0)-1)
+            if (fila == matriz.GetLength(0) - 1)
             {
                 if (columna == 0)
                 {
-                    if ((matriz[fila - 1, columna] == null || matriz[fila - 1, columna].verificar_ocupacion() == true) && 
+                    if ((matriz[fila - 1, columna] == null || matriz[fila - 1, columna].verificar_ocupacion() == true) &&
                         (matriz[fila, columna + 1] == null || matriz[fila, columna + 1].verificar_ocupacion() == true))
                     {
                         return true;
@@ -318,9 +341,9 @@ namespace este_fue_proyecto
 
                 }
 
-                else if (columna == matriz.GetLength(1)-1)
+                else if (columna == matriz.GetLength(1) - 1)
                 {
-                    if ((matriz[fila - 1, columna] == null || matriz[fila - 1, columna].verificar_ocupacion() == true) && 
+                    if ((matriz[fila - 1, columna] == null || matriz[fila - 1, columna].verificar_ocupacion() == true) &&
                         (matriz[fila, columna - 1] == null || matriz[fila, columna - 1].verificar_ocupacion() == true))
                     {
                         return true;
@@ -332,8 +355,8 @@ namespace este_fue_proyecto
                 }
                 else if (columna > 0)
                 {
-                    if ((matriz[fila - 1, columna] == null || matriz[fila - 1, columna].verificar_ocupacion() == true) && 
-                        (matriz[fila, columna + 1] == null || matriz[fila, columna + 1].verificar_ocupacion() == true) && 
+                    if ((matriz[fila - 1, columna] == null || matriz[fila - 1, columna].verificar_ocupacion() == true) &&
+                        (matriz[fila, columna + 1] == null || matriz[fila, columna + 1].verificar_ocupacion() == true) &&
                         (matriz[fila, columna - 1] == null || matriz[fila, columna - 1].verificar_ocupacion() == true))
                     {
                         return true;
@@ -361,7 +384,7 @@ namespace este_fue_proyecto
 
                 }
 
-                else if (columna == matriz.GetLength(1)-1)
+                else if (columna == matriz.GetLength(1) - 1)
                 {
                     if ((matriz[fila - 1, columna] == null || matriz[fila - 1, columna].verificar_ocupacion() == true) &&
                         (matriz[fila + 1, columna] == null || matriz[fila + 1, columna].verificar_ocupacion() == true) &&
@@ -376,9 +399,9 @@ namespace este_fue_proyecto
                 }
                 else if (columna > 0)
                 {
-                    if ((matriz[fila - 1, columna] == null || matriz[fila - 1, columna].verificar_ocupacion() == true) && 
-                        (matriz[fila + 1, columna] == null || matriz[fila + 1, columna].verificar_ocupacion() == true) && 
-                        (matriz[fila, columna + 1] == null || matriz[fila, columna + 1].verificar_ocupacion() == true) && 
+                    if ((matriz[fila - 1, columna] == null || matriz[fila - 1, columna].verificar_ocupacion() == true) &&
+                        (matriz[fila + 1, columna] == null || matriz[fila + 1, columna].verificar_ocupacion() == true) &&
+                        (matriz[fila, columna + 1] == null || matriz[fila, columna + 1].verificar_ocupacion() == true) &&
                         (matriz[fila, columna - 1] == null || matriz[fila, columna - 1].verificar_ocupacion() == true))
                     {
                         return true;

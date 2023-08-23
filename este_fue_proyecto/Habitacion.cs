@@ -147,5 +147,10 @@ namespace este_fue_proyecto
             }
         }
 
+        public string get_nombre()
+        {
+            return Nombre;
+        }
+
     }
 }

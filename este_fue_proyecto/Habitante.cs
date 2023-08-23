@@ -20,6 +20,7 @@ namespace este_fue_proyecto
         {
             if (Dinero >= cantidad)
             {
+                //commit de Habitante
                 Console.WriteLine("-----------------------------------------------------------------------");
                 
                 Console.WriteLine($"La cantidad de dinero que tienes es: {Dinero}");

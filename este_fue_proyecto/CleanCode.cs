@@ -56,15 +56,15 @@ namespace este_fue_proyecto
                     {
                         break;
                     }
-                    else
-                    {
-                        continue;
-                    }
                 }
                 else
                 {
                     Console.WriteLine("ingrese un numero valido porfavor");
                     goto primer_while;
+                }
+                if (numero_decision == 1)
+                {
+
                 }
 
             }

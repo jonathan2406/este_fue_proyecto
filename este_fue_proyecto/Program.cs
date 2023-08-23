@@ -11,14 +11,6 @@ namespace este_fue_proyecto
     {
         static void Main()
         {
-
-            Casa casita = new Casa(2,2);
-            casita.MostrarMatriz();
-            Habitante habitante_1 = new Habitante("pepe");
-            Habitacion dungeon = casita.añadir_habitacion("dungeon", 7,7 ,45);
-            habitante_1.meter(dungeon);
-            Console.WriteLine(dungeon.lista_personas);
-            casita.añadir_habitacion("salita", 6, 5, 55);
         }
     }
 

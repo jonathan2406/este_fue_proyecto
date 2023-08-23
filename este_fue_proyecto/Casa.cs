@@ -7,10 +7,10 @@ namespace este_fue_proyecto
 {
     class Casa
     {
-        public int filas;
-        public int columnas;
-        public Habitacion[,] matriz;
-        public Habitacion[,] matriz_vieja;
+        int filas;
+        int columnas;
+        Habitacion[,] matriz;
+        Habitacion[,] matriz_vieja;
 
         public Casa(int filas, int columnas)
         {
@@ -80,10 +80,6 @@ namespace este_fue_proyecto
                 return false;
             }
         }
-        public Habitacion[,] get_plano()
-        {
-            return matriz;
-        }
         
         public void expandir_plano(int fila, int columna)
         {
@@ -111,7 +107,7 @@ namespace este_fue_proyecto
 
         public Habitacion añadir_habitacion(string nombre_habitacion, int fila, int columna, int metros)
         {
-            if (get_plano().GetLength(0)-1  < fila || get_plano().GetLength(1)-1  < columna)
+            if (matriz.GetLength(0)-1  < fila || matriz.GetLength(1)-1  < columna)
             {
                 expandir_plano(fila, columna);
                 Console.WriteLine("se expandio");
@@ -217,21 +213,21 @@ namespace este_fue_proyecto
                             añadir_nueva_columna(columna_encontrada + j);
                             matriz[fila_encontrada, columna_encontrada + j] = habitacion_amplear;
                         }
-                        else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && get_plano()[fila_encontrada, (columna_encontrada + j)+1] != null)
+                        else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && matriz[fila_encontrada, (columna_encontrada + j)+1] != null)
                         {
                             Console.WriteLine(" entro por el segundo if");
                             if (columna_encontrada + j + 1 == matriz.GetLength(1) - 1)
                             {
                                 añadir_nueva_columna(columna_encontrada + j + 1);
                             }
-                            else if (get_plano()[fila_encontrada, (columna_encontrada + j) +2 ] == null)
+                            else if (matriz[fila_encontrada, (columna_encontrada + j) +2 ] == null)
                             {
-                                matriz[fila_encontrada, columna_encontrada + j + 2] = get_plano()[fila_encontrada, (columna_encontrada + j) + 1];
-                                get_plano()[fila_encontrada, (columna_encontrada + j) + 1] = null;
+                                matriz[fila_encontrada, columna_encontrada + j + 2] = matriz[fila_encontrada, (columna_encontrada + j) + 1];
+                                matriz[fila_encontrada, (columna_encontrada + j) + 1] = null;
                             }
                             añadir_nueva_columna(columna_encontrada + j + 1);
                         }
-                        else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && get_plano()[fila_encontrada, (columna_encontrada) + 1 + j] == null)
+                        else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && matriz[fila_encontrada, (columna_encontrada) + 1 + j] == null)
                         {
                             Console.WriteLine("entro  por el tercer if");
                             matriz[fila_encontrada, columna_encontrada + j + 1] = habitacion_amplear;

@@ -33,7 +33,10 @@ namespace este_fue_proyecto
         {
             habitacion.QuitarPersona(this);
             Console.WriteLine($"{Nombre} se ha quitado de: {habitacion.Nombre}");
-          
+        }
+        public string get_nombre()
+        {
+            return Nombre;
         }
     }
 }

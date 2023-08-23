@@ -37,9 +37,9 @@ namespace este_fue_proyecto
             }
         }
 
-        public void PeticionIntervencion()
+        void peticion_inicial()
         {
-                    
+
         }
 
     }

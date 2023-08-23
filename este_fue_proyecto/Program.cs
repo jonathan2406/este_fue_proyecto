@@ -14,10 +14,11 @@ namespace este_fue_proyecto
             
             Casa casita_1 = new Casa(5, 5);
             CleanCode empresa = new CleanCode(5);
-            Habitacion cuarto = new Habitacion("cuarto", 15);
+            Habitacion cuarto = new Habitacion("Cuarto", 10);
             Habitante HabitanteMain = new Habitante("Lasso");
             Remodelador remodelador1 = new Remodelador("Remodelador1");
             
+
             Console.WriteLine($"El {cuarto.Nombre} tiene {cuarto.Area} metros cuadrados.");
             
             
@@ -30,10 +31,9 @@ namespace este_fue_proyecto
             Console.WriteLine($"Cantidad de personas en la habitación : {cuarto.Nombre}, {cuarto.lista_personas.Count}");
 
 
-
+            remodelador1.añadir_habitacion(casita_1, HabitanteMain, "Cuarto", 0, 0, 10);
             casita_1.MostrarMatriz();
-            casita_1.ModificarValor(0, 0, cuarto);
-            casita_1.MostrarMatriz();
+            
 
            
             

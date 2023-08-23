@@ -33,63 +33,22 @@ namespace este_fue_proyecto
         {
             costo_hora = nuevo_valor;
         }
-        public void añadir_habitacion(string nombre_habitacion, Casa casa, Habitante habitante, int fila, int columna, int metros, bool verificador = true)
+        public void añadir_habitacion(Casa casa, Habitante habitante, string nombreHabitacion, int fila, int columna, int metros)
         {
-            int metros_originales = metros;
-            double costoPorMetro = 200000;
-            double costoTotal = metros * costoPorMetro;
-
-
-            if (habitante.Pagar(costoTotal))
+            if (habitante.Dinero >= metros * 1.5)
             {
-
-                for (int i = 0; i < metros; i++)
-                {
-                    if (metros > 0)
-                    {
-                        try
-                        {
-                            if (casa.Trabajar_trabajant(fila, columna + i) == true && verificador == true)
-                            {
-                                metros = metros - 10;
-                                verificador = false;
-                                Habitacion nueva_habitacion = new Habitacion(nombre_habitacion, metros_originales);
-                                casa.ModificarValor(fila, columna + i, nueva_habitacion);
-                            }
-                            else if (casa.Trabajar_trabajant(fila, columna + i) == true && verificador == false)
-                            {
-                                metros = metros - 10;
-                                casa.ModificarValor(fila, columna + i, casa.get_plano()[fila, columna + i - 1]);
-                            }
-                            else
-                            {
-                                Console.WriteLine("Error!!!, se detecto gente en una habitacion adyacente, porfavor muevalos antes de añadir una habitacion con sus especificaciones");
-                                casa.matriz = casa.matriz_vieja;
-                                casa.filas = casa.get_plano().GetLength(0);
-                                casa.columnas = casa.get_plano().GetLength(1);
-                                break;
-                            }
-                        }
-                        catch
-                        {
-                            casa.expandir_plano(fila, columna + i);
-                            i -= 1;
-                        }
-
-                    }
-                    else
-                    {
-                        casa.matriz_vieja = casa.matriz;
-                    }
-                }
+                Habitacion nuevaHabitacion = new Habitacion(nombreHabitacion, metros);
+                casa.ModificarValor(fila, columna, nuevaHabitacion);
+                habitante.Pagar(metros * 1.5);
+                Console.WriteLine($"Se añadió la habitación {nombreHabitacion} a la casa.");
             }
             else
             {
-                Console.WriteLine("No tienes suficiente dinero para añadir la habitación.");
+                Console.WriteLine($"El habitante {habitante.Nombre} no tiene suficiente dinero para añadir la habitación.");
             }
         }
 
-        public void reparar_habitacion(Habitacion habitacion, Habitante habitante)
+            public void reparar_habitacion(Habitacion habitacion, Habitante habitante)
         {
             if (get_estado_ocupacion())
             {

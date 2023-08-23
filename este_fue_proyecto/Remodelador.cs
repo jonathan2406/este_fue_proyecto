@@ -10,6 +10,7 @@ namespace este_fue_proyecto
 {
     internal class Remodelador : Persona
     {
+
         bool estado_ocupacion = false;
         int costo_hora = 50000;
         private int tiempo_arreglo_por_objeto = 10;
@@ -33,7 +34,13 @@ namespace este_fue_proyecto
         }
         void trabajador_añadir_habitacion(Casa casa, string nombre_habitacion, int fila, int columna, int metros)
         {
+            casa.añadir_habitacion(nombre_habitacion, fila, columna, metros);
         }
+        void trabajador_amplear_habitacion(Casa casa, Habitacion habitacion, int metros)
+        {
+            casa.ampliar_habitacion(habitacion, metros);
+        }
+
   
         public void reparar_habitacion(Habitacion habitacion)
         {

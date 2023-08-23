@@ -87,8 +87,16 @@ namespace este_fue_proyecto
         
         public void expandir_plano(int fila, int columna)
         {
+            if (fila < filas)
+            {
+                fila =(filas)- 1;
+            }
+            if (columna < columnas)
+            {
+                columna =(columnas)- 1;
+            }
             Habitacion[,] vieja_matriz = matriz;
-            Habitacion[,] nueva_matriz = new Habitacion[fila, columna];
+            Habitacion[,] nueva_matriz = new Habitacion[fila+1, columna+1];
             for (int i = 0; i < vieja_matriz.GetLength(0); i++)
             {
                 for (int j = 0; j < vieja_matriz.GetLength(1); j++)
@@ -101,54 +109,49 @@ namespace este_fue_proyecto
             columnas = nueva_matriz.GetLength(1);
         }
 
-        public void añadir_habitacion(string nombre_habitacion, int fila, int columna, int metros, bool verificador = true)
+        public Habitacion añadir_habitacion(string nombre_habitacion, int fila, int columna, int metros)
         {
-            int metros_originales = metros;
-            for (int i = 0; i < metros; i++)
+            if (get_plano().GetLength(0)-1  < fila || get_plano().GetLength(1)-1  < columna)
             {
-                if (metros > 0)
-                {
-                    if (get_plano().GetLength(0) - 1 < fila || get_plano().GetLength(1) - 1 < columna)
-                    {
-                        expandir_plano(fila + i, columna + i);
-                    }
-                    try
-                    {
-                        if (Trabajar_trabajant(fila, columna + i) == true && verificador == true)
-                        {
-                            metros = metros - 10;
-                            verificador = false;
-                            Habitacion nueva_habitacion = new Habitacion(nombre_habitacion, metros_originales);
-                            if (ModificarValor(fila, columna + i, nueva_habitacion) == false)
-                            {
-                                return;
-                            }
-                        }
-                        else if (Trabajar_trabajant(fila, columna + i) == true && verificador == false)
-                        {
-                            metros = metros - 10;
-                            ModificarValor(fila, columna + i, get_plano()[fila, columna + i - 1]);
-                        }
-                        else
-                        {
-                            Console.WriteLine("error!!!, se detecto gente en una habitacion adyacente, porfavor muevalos antes de añadir una habitacion con sus especificaciones");
-                            matriz = matriz_vieja;
-                            filas = get_plano().GetLength(0);
-                            columnas = get_plano().GetLength(1);
-                            break;
-                        }
-                    }
-                    catch
-                    {
-                        expandir_plano(fila, columna + i);
-                        i -= 1;
-                    }
+                expandir_plano(fila, columna);
+                Console.WriteLine("se expandio");
+                MostrarMatriz();
+            }
 
+            if (Trabajar_trabajant(fila, columna) == true)
+            {
+                Habitacion nueva_habitacion = new Habitacion(nombre_habitacion, metros);
+                bool modificacion = ModificarValor(fila, columna, nueva_habitacion);
+                if (modificacion == false)
+                {
+                    matriz = matriz_vieja;
+                    return null;
                 }
                 else
                 {
-                    matriz_vieja = matriz;
+                    if (metros > 10)
+                    {
+                        bool ampliacion = ampliar_habitacion(nueva_habitacion, metros - 10);
+                        if (ampliacion == true)
+                        {
+                            nueva_habitacion.set_medidas(nueva_habitacion.get_medidas() + 10);
+                            return nueva_habitacion;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                    else
+                    {
+                        return nueva_habitacion;
+                    }
                 }
+            }
+            else
+            {
+                Console.WriteLine("errorrrrrrrrrrrrrrrrrrrr");
+                return null;
             }
         }
 
@@ -191,12 +194,12 @@ namespace este_fue_proyecto
             return (0, 0);
         }
 
-        public void ampliar_habitacion(Habitacion habitacion_amplear, double metros)
+        public bool ampliar_habitacion(Habitacion habitacion_amplear,  double metros)
         {
             if (metros <= 0)
             {
                 Console.WriteLine("ingrese un numero positivo plzzzzzzzzzzz");
-                return;
+                return false;
             }
             double metros_viejos = habitacion_amplear.get_medidas();
             habitacion_amplear.set_medidas(metros);
@@ -205,40 +208,42 @@ namespace este_fue_proyecto
                 (int fila_encontrada, int columna_encontrada) = posicion_habitacion(habitacion_amplear);
                 if (matriz[fila_encontrada, columna_encontrada] == habitacion_amplear)
                 {
-                    Console.WriteLine("encontre ubicacion");
                     metros = metros / 10;
                     for (int j = 0; j < metros; j++)
                     {
-                        Console.WriteLine($"iteracion {j}");
-                        Console.WriteLine(metros);
-                        Console.WriteLine(metros);
                         if (matriz.GetLength(1)-1 == columna_encontrada+j && Trabajar_trabajant(fila_encontrada, columna_encontrada+j) == true)
                         {
-                            Console.WriteLine("se metio por el primer if");
+                            Console.WriteLine("entro por el primer if");
                             añadir_nueva_columna(columna_encontrada + j);
                             matriz[fila_encontrada, columna_encontrada + j] = habitacion_amplear;
-                            MostrarMatriz();
                         }
-                        if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && get_plano()[fila_encontrada, (columna_encontrada + j)+1] != null)
+                        else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && get_plano()[fila_encontrada, (columna_encontrada + j)+1] != null)
                         {
+                            Console.WriteLine(" entro por el segundo if");
+                            if (columna_encontrada + j + 1 == matriz.GetLength(1) - 1)
+                            {
+                                añadir_nueva_columna(columna_encontrada + j + 1);
+                            }
+                            else if (get_plano()[fila_encontrada, (columna_encontrada + j) +2 ] == null)
+                            {
+                                matriz[fila_encontrada, columna_encontrada + j + 2] = get_plano()[fila_encontrada, (columna_encontrada + j) + 1];
+                                get_plano()[fila_encontrada, (columna_encontrada + j) + 1] = null;
+                            }
                             añadir_nueva_columna(columna_encontrada + j + 1);
-                            Console.WriteLine("se metio por el segundo if");
-                            MostrarMatriz();
                         }
-                        if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && get_plano()[fila_encontrada, (columna_encontrada) + 1 + j] == null)
+                        else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == true && get_plano()[fila_encontrada, (columna_encontrada) + 1 + j] == null)
                         {
-                            Console.WriteLine("semetio por el tercer if");
+                            Console.WriteLine("entro  por el tercer if");
                             matriz[fila_encontrada, columna_encontrada + j + 1] = habitacion_amplear;
-                            MostrarMatriz();
                         }
-                        else if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == false)
+                        if (Trabajar_trabajant(fila_encontrada, columna_encontrada + j) == false)
                         {
                             Console.WriteLine("errorrrrrrrr no puedes amplear ya que en las ubicaciones adyacentes detectamos personas, porfavor retirelas para continuar");
                             matriz = matriz_vieja;
                             filas = matriz_vieja.GetLength(0);
                             columnas = matriz_vieja.GetLength(1);
                             habitacion_amplear.set_medidas(metros_viejos);
-                            return;
+                            return false;
                         }
                     }
                 }
@@ -247,11 +252,13 @@ namespace este_fue_proyecto
                 Console.WriteLine("el plano nuevo quedaria:  ");
                 MostrarMatriz();
                 matriz_vieja = matriz;
+                return true;
             }
 
             else
             {
                 Console.WriteLine("desocupe la habitacion que desea ampliar.....");
+                return false;
             }
         }
 

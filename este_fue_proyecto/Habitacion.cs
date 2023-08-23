@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -11,9 +12,12 @@ namespace este_fue_proyecto
     {
         public string Nombre { get; set; }
         public double Area { get; set; }
+        public const int LimiteMuebles = 4;
+        private int cantidadMuebles = 0;
         private List<Muebles> lista_muebles;
         public List<Persona> lista_personas;
         private Habitante habitante_principal;
+
  
  
 
@@ -26,12 +30,13 @@ namespace este_fue_proyecto
 
         }
 
-        public void AgregarHabitante(Habitante habitante)
+        public void AgregarHabitante(Habitante habitante, Habitacion habitacion)
         {
             if (habitante_principal == null)
             {
                 habitante_principal = habitante;
                 Console.WriteLine($"{habitante.Nombre} es el habitante principal de la habitación {Nombre}.");
+                habitante.meter(habitacion);
 
             }
             else
@@ -57,10 +62,20 @@ namespace este_fue_proyecto
         }
         public void AgregarMueble(Muebles mueble)
         {
-            lista_muebles.Add(mueble);
-            Console.WriteLine($"{mueble.Nombre} ha sido agregado a: {Nombre}.");
+            if (cantidadMuebles < LimiteMuebles)
+            {
+                lista_muebles.Add(mueble);
+                cantidadMuebles++;
+                Console.WriteLine($"{mueble.Nombre} ha sido agregado a: {Nombre}.");
+            }
+            else
+            {
+                Console.WriteLine($"La habitación {Nombre} ya está llena. No se pueden agregar más muebles.");  
+            }
+            
 
         }
+
 
         public void mostrar_muebles()
         {
@@ -124,11 +139,13 @@ namespace este_fue_proyecto
             if (lista_personas.Count > 0)
             {
                 return false;
+                
             }
             else
             {
                 return true;
             }
         }
+
     }
 }

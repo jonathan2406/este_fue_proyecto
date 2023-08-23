@@ -47,10 +47,6 @@ namespace este_fue_proyecto
                 {
                     if (metros > 0)
                     {
-                        if (casa.get_plano().GetLength(0) - 1 < fila || casa.get_plano().GetLength(1) - 1 < columna)
-                        {
-                            casa.expandir_plano(fila + i, columna + i);
-                        }
                         try
                         {
                             if (casa.Trabajar_trabajant(fila, columna + i) == true && verificador == true)

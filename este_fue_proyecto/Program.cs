@@ -16,7 +16,7 @@ namespace este_fue_proyecto
             CleanCode empresa = new CleanCode(5);
             Habitacion cuarto = new Habitacion("cuarto", 15);
             Habitante HabitanteMain = new Habitante("Lasso");
-            Remodelador remodelador1 = new Remodelador();
+            Remodelador remodelador1 = new Remodelador("Remodelador1");
             
             Console.WriteLine($"El {cuarto.Nombre} tiene {cuarto.Area} metros cuadrados.");
             
@@ -61,7 +61,7 @@ namespace este_fue_proyecto
             Cama cama2 = new Cama("Media cama", 2000);
             Sofa sofa2 = new Sofa("Medio sofa sabroso", 2000);
 
-            Remodelador remodelador = new Remodelador();
+            Remodelador remodelador = new Remodelador("Remodelador1");
 
             habitacion1.AgregarHabitante(HabitanteMain, habitacion1);
             Console.WriteLine("-----------------------------------------------------------------------");

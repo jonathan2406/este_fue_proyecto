@@ -175,32 +175,7 @@ namespace este_fue_proyecto
                     Console.WriteLine("No se arreglo ningún mueble.");
                 }
             }
-            double tiempoTotalTrabajo = totalMueblesSeleccionados * 1;
-
-            if (totalMueblesSeleccionados > 0)
-            {
-                double costoTotalTrabajo = tiempoTotalTrabajo * 40000;
-                habitante.Pagar(costoTotalTrabajo);
-                Console.WriteLine($"Habitante {habitante.Nombre} pagó {costoTotalTrabajo} por las horas de trabajo de los " +
-                    $"remodeladores.");
-            }
-
-            if (puedePagarTareas)
-            {
-                DateTime localDate = DateTime.Now;
-                DateTime newDate = localDate.AddHours(1 * totalMueblesSeleccionados);
-                String[] cultureNames = { "es-CO" };
-
-                foreach (var cultureName in cultureNames)
-                {
-                    var culture = new CultureInfo(cultureName);
-                    Console.WriteLine("-----------------------------------------------------------------------");
-                    Console.WriteLine("{0}:", culture.NativeName);
-                    Console.WriteLine("Los remodeladores terminaron de reparar los muebles a las: {0}, {1:G}",
-                                      newDate.ToString(culture), newDate.Kind);
-                    Console.WriteLine($"Saldo de {habitante.Nombre}: ${habitante.Dinero}");
-                }
-            }
+            
             estado_ocupacion = false;
         }
 
@@ -272,8 +247,12 @@ namespace este_fue_proyecto
             List<Muebles> opcionesMuebles = new List<Muebles>
             {
                 new Lampara("Lampara de techo", 5000),
-                new Sofa("Sofa grande", 1500),
-                new Cama("Cama de agua", 2000)
+                new Sofa("Sofa grande", 5000),
+                new Cama("Cama de agua", 2000),
+                new Lampara("Lampara de lava", 5000),
+                new Cama("Cama de matrimonio", 10000),
+                new Sofa("Sofa pequeño", 3000)
+
             };
 
             if (habitacion.GetMuebles().Count >= Habitacion.LimiteMuebles)
@@ -287,17 +266,18 @@ namespace este_fue_proyecto
                 Console.WriteLine($"{i + 1}. {opcionesMuebles[i].Nombre} - Precio: ${opcionesMuebles[i].GetCosto()}");
             }
 
-            
+
             Console.WriteLine("Elija los números de los muebles que desea agregar (separados por comas):");
             string inputMuebles = Console.ReadLine();
             string[] numerosMuebles = inputMuebles.Split(',');
+            List<Muebles> mueblesElegidos = new List<Muebles>();
 
             foreach (string numeroMueble in numerosMuebles)
             {
                 if (int.TryParse(numeroMueble.Trim(), out int indiceMueble) && indiceMueble >= 1 && indiceMueble <= opcionesMuebles.Count)
                 {
                     Muebles muebleElegido = opcionesMuebles[indiceMueble - 1];
-                    opcionesMuebles.Add(muebleElegido);
+                    mueblesElegidos.Add(muebleElegido);
                     costoTotalDecoracion += muebleElegido.GetCosto();
                 }
                 else
@@ -308,23 +288,19 @@ namespace este_fue_proyecto
 
             if (habitante.Pagar(costoTotalDecoracion))
             {
-                foreach (Muebles muebleElegido in opcionesMuebles)
+                foreach (Muebles muebleElegido in mueblesElegidos)
                 {
                     habitacion.AgregarMueble(muebleElegido);
                 }
-
-                DateTime localDate = DateTime.Now;
-                DateTime newDate = localDate.AddHours(0.5 * opcionesMuebles.Count);
-
-                
-                calcular_tiempo_decorar_habitacion(newDate, habitante);
             }
+
+
             else
             {
                 Console.WriteLine($"El habitante {habitante.Nombre} no tiene suficiente dinero para decorar la habitación.");
             }
+            
         }
-
 
         private static void calcular_tiempo_decorar_habitacion(DateTime newDate, Habitante habitante)
         {

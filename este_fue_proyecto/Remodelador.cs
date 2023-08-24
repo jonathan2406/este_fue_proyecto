@@ -167,8 +167,8 @@ namespace este_fue_proyecto
                 }
             }
             Console.WriteLine("-----------------------------------------------------------------------");
-            Console.WriteLine($"Tiempo estimado de trabajo en horas para reparar los muebles: {tiempoEstimadoHoras} horas y " +
-            $"{costoTotalReparacion}");
+            Console.WriteLine($"Tiempo estimado de trabajo en hora/s para reparar los muebles: {tiempoEstimadoHoras} horas y " +
+            $"{costoTotalReparacion}$");
 
             estado_ocupacion = false;
         }

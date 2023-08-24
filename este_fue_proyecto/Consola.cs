@@ -108,7 +108,57 @@ namespace este_fue_proyecto
                 }
                 else if (numero_decision == 2)
                 {
- 
+                    Console.WriteLine("\n-- Ingrese el número de la fila donde está ubicada la habitación:    ");
+                    int fila = int.Parse(Console.ReadLine());
+                    Console.WriteLine("\n-- Ingrese el número de columna donde está ubicada la habitación:    ");
+                    int columna = int.Parse(Console.ReadLine());
+                    Console.WriteLine("\n-- ingrese el numero de metros que desea ampliar:     ");
+                    int metros = int.Parse(Console.ReadLine());
+
+                    if (casa.ampliar_habitacion(casa.get_plano()[fila, columna], metros) == false)
+                    {
+                        Console.WriteLine("-- No se puede hacer esta acción .......");
+                        goto primer_while;
+                    }
+                    // ---------------------------------------------------------------------------------------
+                    //calculo costo y numero de trabajadores
+                    double horasPorMetroCuadrado = 1;
+                    double metrosCuadrados = metros;
+                    double tiempoTotal = metrosCuadrados * horasPorMetroCuadrado;
+                    int trabajadores = (int)metrosCuadrados / 10;
+                    tiempoTotal += trabajadores * horasPorMetroCuadrado;
+                    double costoTotal = tiempoTotal * 40000;
+                    List<Remodelador> remodeladores_para_construir = empresa.coger_remodelador_desocupado();
+                    if (remodeladores_para_construir.Count >= trabajadores)
+                    {
+                        Console.WriteLine("tenemos todos los trabajadores para hacer esta peticion!!!!!");
+                    }
+                    else
+                    {
+                        casa.set_matriz(matriz_obtenida);
+                        casa.set_matriz_vieja(matriz_obtenida);
+                        Console.WriteLine("nos faltan trabajadores para hacer esa accion, muchos ocupados ya");
+                        goto primer_while;
+
+                    }
+
+                    // vamos a poner un tiempo ficticcio para que los trabajadores se puedan utilizar despues
+
+                    int tiempo_simulacion = 20;
+                    for (int i = 0; i < trabajadores; i++)
+                    {
+                        remodeladores_para_construir[i].set_hora_ocupacion(DateTime.Now.AddSeconds(tiempo_simulacion));
+                    }
+
+                    Console.WriteLine("el plano antes era");
+                    MostrarMatriz_trabajador();
+                    Console.WriteLine("el plano quedo asi:");
+                    casa.MostrarMatriz();
+                    Console.WriteLine("----------------");
+                    Console.WriteLine($"el tiempo necesario para realizar esta obra es de:  {tiempoTotal} horas" +
+                        $"\nse necesitaron {trabajadores}" +
+                        $"\nel costo total de esta obra es de {costoTotal}" +
+                        $"\nquedan {remodeladores_para_construir.Count - trabajadores} para usar");
 
 
                 }

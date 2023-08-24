@@ -52,20 +52,13 @@ namespace este_fue_proyecto
             {
                 if (lista_remodeladores[i].verificar_disponibilidad_trabajador() == true)
                 {
-                    if (matriz_vieja_trabajador[i, j] != null)
-                    {
-                        Console.Write(matriz_vieja_trabajador[i, j].Nombre + " ");
-                    }
-                    else
-                    {
-                        Console.Write("Vacío! ");
-                    }
+                    lista_desocupados.Add(lista_remodeladores[i]);
                 }
-                Console.WriteLine();
             }
-            Console.WriteLine();
+            return lista_desocupados;
+                
         }
-        public void menu(Casa casa, Habitante persona_solicitante)
+        /*public void menu(Casa casa, Habitante persona_solicitante)
         {
             Console.WriteLine("Plano de la casa actual: ");
             Console.WriteLine("-------------------------------------------------------------------------------------");
@@ -243,6 +236,6 @@ namespace este_fue_proyecto
 
                 }
             }
-        }
+        }*/
     }
 }

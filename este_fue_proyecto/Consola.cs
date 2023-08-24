@@ -15,7 +15,7 @@ namespace este_fue_proyecto
             matriz_obtenida = casa.get_plano();
             MostrarMatriz_trabajador();
             Console.WriteLine("Bienvenido a intervenciones clean code");
-            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine("---------------------------------------------");
 
         primer_while:
             while (true)

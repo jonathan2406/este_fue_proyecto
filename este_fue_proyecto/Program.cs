@@ -11,8 +11,12 @@ namespace este_fue_proyecto
     {
         static void Main()
         {
-            
-            Casa casita_1 = new Casa(5, 5);
+            Casa casita = new Casa(5, 5);
+            CleanCode empresa = new CleanCode(10);
+            Habitante pepe = new Habitante("pepe");
+
+            empresa.menu(casita, pepe);
+            /*Casa casita_1 = new Casa(5, 5);
             CleanCode empresa = new CleanCode(5);
             Habitacion cuarto = new Habitacion("Cuarto", 10);
             Habitante HabitanteMain = new Habitante("Lasso");
@@ -38,14 +42,14 @@ namespace este_fue_proyecto
            
             
             
-            /*
+         
             Console.WriteLine("-------------------------------------------------------------------------------------");
             Console.WriteLine(casita_1.Trabajar_trabajant(2, 0));
             empresa.get_lista_remodeladores()[0].añadir_habitacion("cuarto", casita_1, 10, 10, 15);
             casita_1.MostrarMatriz();
             empresa.get_lista_remodeladores()[0].añadir_habitacion("cuarto", casita_1, 10, 8, 25);
             casita_1.MostrarMatriz();
-           */
+          
 
 
            
@@ -88,7 +92,6 @@ namespace este_fue_proyecto
 
             Console.WriteLine("-----------------------------------------------------------------------");
 
-            /*
             habitacion1.AgregarMueble(lampara2);
 
             Console.WriteLine("-----------------------------------------------------------------------");
@@ -98,7 +101,7 @@ namespace este_fue_proyecto
             Console.WriteLine("-----------------------------------------------------------------------");
 
             habitacion1.AgregarMueble(sofa2);
-            */
+     
             Console.WriteLine("-----------------------------------------------------------------------");
 
             habitacion1.mostrar_muebles();
@@ -131,7 +134,7 @@ namespace este_fue_proyecto
             habitacion1.mostrar_muebles();
 
 
-            persona2.quitar(habitacion1);
+            persona2.quitar(habitacion1);*/
 
             
             

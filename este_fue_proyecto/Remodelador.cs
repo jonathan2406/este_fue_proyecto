@@ -12,11 +12,14 @@ namespace este_fue_proyecto
     internal class Remodelador : Persona
     {
 
+        public DateTime hora_ocupacion;
         bool estado_ocupacion = false;
         int costo_hora = 40000;
         private double tiempo_arreglo_por_objeto = 1;
 
-        public Remodelador(string nombre) : base(nombre) { }
+        public Remodelador(string nombre) : base(nombre) 
+        {
+        }
         public bool get_estado_ocupacion()
         {
             return estado_ocupacion;
@@ -48,7 +51,7 @@ namespace este_fue_proyecto
             }
         }
 
-            public void reparar_habitacion(Habitacion habitacion, Habitante habitante)
+        public void reparar_habitacion(Habitacion habitacion, Habitante habitante)
         {
             if (get_estado_ocupacion())
             {

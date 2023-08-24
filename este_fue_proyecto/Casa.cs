@@ -11,6 +11,7 @@ namespace este_fue_proyecto
         int columnas;
         Habitacion[,] matriz;
         Habitacion[,] matriz_vieja;
+        Habitacion[,] backup;
 
         public Casa(int filas, int columnas)
         {
@@ -19,7 +20,16 @@ namespace este_fue_proyecto
             matriz = new Habitacion[filas, columnas];
             matriz_vieja = matriz;
         }
-
+        public void set_matriz(Habitacion[,] matriz_a_poner)
+        {
+            matriz = matriz_a_poner;
+            filas = matriz_a_poner.GetLength(0);
+            columnas = matriz_a_poner.GetLength(1);
+        }
+        public void set_matriz_vieja(Habitacion[,] matriz_a_poner)
+        {
+            matriz_vieja = matriz_a_poner;
+        }
         public void MostrarMatriz()
         {
             for (int i = 0; i < filas; i++)
@@ -263,10 +273,6 @@ namespace este_fue_proyecto
                         }
                     }
                 }
-                Console.WriteLine("el plano viejo era:  ");
-                MostrarMatriz_vieja();
-                Console.WriteLine("el plano nuevo quedaria:  ");
-                MostrarMatriz();
                 matriz_vieja = matriz;
                 return true;
             }
@@ -413,6 +419,9 @@ namespace este_fue_proyecto
             return true;
         }
 
-
+        public Habitacion[,] get_plano()
+        {
+            return matriz;
+        }
     }
 }

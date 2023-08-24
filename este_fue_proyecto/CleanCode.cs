@@ -205,6 +205,45 @@ namespace este_fue_proyecto
                 }
                 else if (numero_decision == 3)
                 {
+                    Console.WriteLine("Seleccione la habitación que desea decorar:");
+                    casa.MostrarMatriz();
+                    Console.WriteLine("Ingrese el número de la fila:");
+                    int fila = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Ingrese el número de la columna:");
+                    int columna = int.Parse(Console.ReadLine());
+
+                    Remodelador remodelador = coger_remodelador_desocupado();
+                    if (remodelador != null)
+                    {
+                        Habitacion habitacionSeleccionada = casa.get_plano()[fila, columna];
+                        remodelador.decorar_habitacion(habitacionSeleccionada, persona_solicitante);
+
+                        matriz_vieja_trabajador = casa.get_plano();
+                        MostrarMatriz_trabajador();
+                    }
+                    else
+                    {
+                        Console.WriteLine("No hay remodeladores disponibles en este momento.");
+                    }
+
+                }
+                else if (numero_decision == 4)
+                {
+                    Console.WriteLine("\ningrese el numero de la fila donde está ubicada la habitación:    ");
+                    int fila = int.Parse(Console.ReadLine());
+                    Console.WriteLine("\ningrese el numero de columna donde está ubicada la habitación:    ");
+                    int columna = int.Parse(Console.ReadLine());
+
+                    Habitacion habitacionAReparar = casa.get_plano()[fila, columna];
+                    if (habitacionAReparar != null)
+                    {
+                        Remodelador remodelador = new Remodelador("Remodelador 1");  
+                        remodelador.reparar_habitacion(habitacionAReparar, persona_solicitante);  
+                    }
+                    else
+                    {
+                        Console.WriteLine("La habitación especificada no existe.");
+                    }
 
                 }
             }

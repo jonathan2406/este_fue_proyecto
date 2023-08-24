@@ -41,7 +41,7 @@ namespace este_fue_proyecto
                 }
                 if (numero_decision == 1)
                 {
-           
+
                     Console.WriteLine("nombre que desea poner a la habitacion:       ");
                     string nombre_habitacion = Console.ReadLine();
                     Console.WriteLine("\ningrese el numero de la fila donde desea poner:    ");
@@ -161,6 +161,76 @@ namespace este_fue_proyecto
                 }
                 else if (numero_decision == 3)
                 {
+                    Console.WriteLine("-- Seleccione la habitación que desea decorar:");
+                    casa.MostrarMatriz();
+                    Console.WriteLine("-- Ingrese el número de la fila:");
+                    int fila = int.Parse(Console.ReadLine());
+                    Console.WriteLine("-- Ingrese el número de la columna:");
+                    int columna = int.Parse(Console.ReadLine());
+
+
+                    int trabajadores = 1;
+
+                    List<Remodelador> remodeladores_para_construir = empresa.coger_remodelador_desocupado();
+                    if (remodeladores_para_construir.Count >= trabajadores)
+                    {
+                        Console.WriteLine("tenemos todos los trabajadores para hacer esta peticion!!!!!");
+                    }
+                    else
+                    {
+                        casa.set_matriz(matriz_obtenida);
+                        casa.set_matriz_vieja(matriz_obtenida);
+                        Console.WriteLine("nos faltan trabajadores para hacer esa accion, muchos ocupados ya");
+                        goto primer_while;
+
+                    }
+
+                    Remodelador remodelador_disparador = remodeladores_para_construir[0];
+                    if (remodelador_disparador != null)
+                    {
+                        Habitacion habitacionSeleccionada = casa.get_plano()[fila, columna];
+                        remodelador_disparador.decorar_habitacion(habitacionSeleccionada, persona_solicitante);
+
+                        matriz_obtenida = casa.get_plano();
+                        MostrarMatriz_trabajador();
+                    }
+                    else
+                    {
+                        Console.WriteLine("-- No hay remodeladores disponibles en este momento.");
+                    }
+                    // vamos a poner un tiempo ficticcio para que los trabajadores se puedan utilizar despues
+
+                    int tiempo_simulacion = 20;
+                    for (int i = 0; i < trabajadores; i++)
+                    {
+                        remodeladores_para_construir[i].set_hora_ocupacion(DateTime.Now.AddSeconds(tiempo_simulacion));
+                    }
+
+
+
+                    Console.WriteLine("----------------");
+                    
+                    Console.WriteLine($"\nse necesitaron {trabajadores} trabajadores" +
+                    $"\nquedan {remodeladores_para_construir.Count - trabajadores} remodeladores para usar");
+
+
+                }
+                else if (numero_decision == 4)
+                {
+                    Console.WriteLine("\n-- Ingrese el número de la fila donde está ubicada la habitación:    ");
+                    int fila = int.Parse(Console.ReadLine());
+                    Console.WriteLine("\n-- Ingrese el numero de columna donde está ubicada la habitación:    ");
+                    int columna = int.Parse(Console.ReadLine());
+
+                    Habitacion habitacionAReparar = casa.get_plano()[fila, columna];
+                    if (habitacionAReparar == null)
+                    {
+                        Console.WriteLine("La habitación especificada no existe.");
+                        goto primer_while;
+                    }
+                    Remodelador remodelador = new Remodelador("Remodelador 1");
+                    remodelador.reparar_habitacion(habitacionAReparar, persona_solicitante, empresa);
+
 
                 }
             }

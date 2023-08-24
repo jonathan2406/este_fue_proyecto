@@ -109,16 +109,9 @@ namespace este_fue_proyecto
 
         }
     
-
-        public void reparar_habitacion(Habitacion habitacion, Habitante habitante)
+        public void reparar_habitacion(Habitacion habitacion, Habitante habitante, CleanCode empresa)
         {
 
-            if (get_estado_ocupacion())
-            {
-                Console.WriteLine("El remodelador está ocupado en otra tarea");
-                return;
-            }
-            estado_ocupacion = true;
             List<Muebles> mueblesPorArreglar = new List<Muebles>();
 
             foreach (Muebles mueble in habitacion.GetMuebles())
@@ -132,7 +125,6 @@ namespace este_fue_proyecto
             if (mueblesPorArreglar.Count == 0)
             {
                 Console.WriteLine("Los muebles ya están reparados.");
-                estado_ocupacion = false;
                 return;
             }
 
@@ -141,10 +133,31 @@ namespace este_fue_proyecto
             {
                 Console.WriteLine($"{i + 1}. {mueblesPorArreglar[i].Nombre}");
             }
+            Console.WriteLine("escriba cuantos muebles quiere reparar: ");
+            int numero = int.Parse(Console.ReadLine());
+
+            // logica tiempo
+            int trabajadores = numero;
+
+            List<Remodelador> remodeladores_para_construir = empresa.coger_remodelador_desocupado();
+            if (remodeladores_para_construir.Count >= trabajadores)
+            {
+                Console.WriteLine("tenemos todos los trabajadores para hacer esta peticion!!!!!");
+            }
+            else
+            {
+                Console.WriteLine("nos faltan trabajadores para hacer esa accion, muchos ocupados ya");
+                return;
+
+            }
+            //---------------------------------
 
             Console.WriteLine("Ingrese los números de los muebles que desea arreglar (separados por comas):");
             string input = Console.ReadLine();
             string[] seleccionados = input.Split(',');
+
+
+
             int totalMueblesSeleccionados = 0;
             double costoTotalReparacion = 0;
             bool puedePagarTareas = true;
@@ -187,8 +200,19 @@ namespace este_fue_proyecto
             Console.WriteLine("-----------------------------------------------------------------------");
             Console.WriteLine($"Tiempo estimado de trabajo en hora/s para reparar los muebles: {tiempoEstimadoHoras} horas y " +
             $"{costoTotalReparacion}$");
-            //cambios.
-            estado_ocupacion = false;
+            //------------------------------------
+            int tiempo_simulacion = 20;
+            for (int i = 0; i < trabajadores; i++)
+            {
+                remodeladores_para_construir[i].set_hora_ocupacion(DateTime.Now.AddSeconds(tiempo_simulacion));
+            }
+
+
+
+            Console.WriteLine("----------------");
+
+            Console.WriteLine($"\nse necesitaron {trabajadores} trabajadores" +
+            $"\nquedan {remodeladores_para_construir.Count - trabajadores} remodeladores para usar");
         }
 
         public double calcular_tiempo_arreglo_habitacion(Habitacion habitacion)

@@ -15,8 +15,8 @@ namespace este_fue_proyecto
             CleanCode empresa = new CleanCode(10);
             Habitante pepe = new Habitante("pepe");
             Consola consola = new Consola();
-            consola.menu(casita, pepe,empresa);
 
+            consola.menu(casita, pepe, empresa);
 
             /*Casa casita_1 = new Casa(5, 5);
             CleanCode empresa = new CleanCode(5);

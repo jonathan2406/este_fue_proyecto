@@ -14,8 +14,6 @@ namespace este_fue_proyecto
         {
             matriz_obtenida = casa.get_plano();
             MostrarMatriz_trabajador();
-            int costo_trabajo = 0;
-            double acumulador_horas = 0;
             Console.WriteLine("Bienvenido a intervenciones clean code");
             Console.WriteLine("--------------------------------------------");
 
@@ -27,7 +25,7 @@ namespace este_fue_proyecto
                     "\npresione 2 para ampliar una habitacion............" +
                     "\npresione 3 para decorar habitacion............" +
                     "\npresione 4 para reparar habitacion............" +
-                    "\npresione 5 para salir----------------\n");
+                    "\npresione 5 para salir............\n");
                 string decision = Console.ReadLine();
                 if (int.TryParse(decision, out int numero_decision) && numero_decision == 1 || numero_decision == 2 || numero_decision == 3 || numero_decision == 4 || numero_decision == 5)
                 {
@@ -53,18 +51,6 @@ namespace este_fue_proyecto
                     Console.WriteLine("\ningrese el numero de metros que desea la habitacion:     ");
                     int metros = int.Parse(Console.ReadLine());
 
-                    Habitacion nueva_habitacion = casa.añadir_habitacion(nombre_habitacion, fila, columna, metros);
-                    Console.WriteLine("se contruyo");
-                    if (nueva_habitacion != null)
-                    {
-                        persona_solicitante.HabitacionAsignada = nueva_habitacion;
-                    }
-                    else
-                    {
-                        Console.WriteLine("no se puede hacer eso........");
-                        goto primer_while;
-                    }
-
                     //calculo costo y numero de trabajadores
                     double horasPorMetroCuadrado = 1.5;
                     double metrosCuadrados = metros;
@@ -85,7 +71,18 @@ namespace este_fue_proyecto
                         goto primer_while;
 
                     }
-                    acumulador_horas += tiempoTotal;
+
+                    Habitacion nueva_habitacion = casa.añadir_habitacion(nombre_habitacion, fila, columna, metros);
+                    Console.WriteLine("se contruyo");
+                    if (nueva_habitacion != null)
+                    {
+                        persona_solicitante.HabitacionAsignada = nueva_habitacion;
+                    }
+                    else
+                    {
+                        Console.WriteLine("no se puede hacer eso........");
+                        goto primer_while;
+                    }
 
                     // vamos a poner un tiempo ficticcio para que los trabajadores se puedan utilizar despues
 
@@ -101,9 +98,9 @@ namespace este_fue_proyecto
                     casa.MostrarMatriz();
                     Console.WriteLine("----------------");
                     Console.WriteLine($"el tiempo necesario para realizar esta obra es de:  {tiempoTotal} horas" +
-                        $"\nse necesitaron {trabajadores}" +
+                        $"\nse necesitaron {trabajadores} trabajadores" +
                         $"\nel costo total de esta obra es de {costoTotal}" +
-                        $"\nquedan {remodeladores_para_construir.Count - trabajadores} para usar");
+                        $"\nquedan {remodeladores_para_construir.Count - trabajadores} remodeladores para usar");
 
                 }
                 else if (numero_decision == 2)
@@ -115,11 +112,6 @@ namespace este_fue_proyecto
                     Console.WriteLine("\n-- ingrese el numero de metros que desea ampliar:     ");
                     int metros = int.Parse(Console.ReadLine());
 
-                    if (casa.ampliar_habitacion(casa.get_plano()[fila, columna], metros) == false)
-                    {
-                        Console.WriteLine("-- No se puede hacer esta acción .......");
-                        goto primer_while;
-                    }
                     // ---------------------------------------------------------------------------------------
                     //calculo costo y numero de trabajadores
                     double horasPorMetroCuadrado = 1;
@@ -141,6 +133,11 @@ namespace este_fue_proyecto
                         goto primer_while;
 
                     }
+                    if (casa.ampliar_habitacion(casa.get_plano()[fila, columna], metros) == false)
+                    {
+                        Console.WriteLine("-- No se puede hacer esta acción .......");
+                        goto primer_while;
+                    }
 
                     // vamos a poner un tiempo ficticcio para que los trabajadores se puedan utilizar despues
 
@@ -156,9 +153,9 @@ namespace este_fue_proyecto
                     casa.MostrarMatriz();
                     Console.WriteLine("----------------");
                     Console.WriteLine($"el tiempo necesario para realizar esta obra es de:  {tiempoTotal} horas" +
-                        $"\nse necesitaron {trabajadores}" +
+                        $"\nse necesitaron {trabajadores} trabajadores" +
                         $"\nel costo total de esta obra es de {costoTotal}" +
-                        $"\nquedan {remodeladores_para_construir.Count - trabajadores} para usar");
+                        $"\nquedan {remodeladores_para_construir.Count - trabajadores} remodeladores para usar");
 
 
                 }

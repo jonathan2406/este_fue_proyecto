@@ -13,12 +13,30 @@ namespace este_fue_proyecto
     {
 
         public DateTime hora_ocupacion;
-        bool estado_ocupacion = false;
         int costo_hora = 40000;
+        bool estado_ocupacion = false;
         private double tiempo_arreglo_por_objeto = 1;
 
         public Remodelador(string nombre) : base(nombre) 
         {
+            this.hora_ocupacion = DateTime.Now;
+        }
+        public bool verificar_disponibilidad_trabajador()
+        {
+            if (hora_ocupacion.CompareTo(DateTime.Now) < 0)
+            {
+                estado_ocupacion = true;
+                return true;
+            }
+            else
+            {
+                estado_ocupacion = false;
+                return false;
+            }
+        }
+        public void set_hora_ocupacion(DateTime tiempo)
+        {
+            hora_ocupacion = tiempo;
         }
         public bool get_estado_ocupacion()
         {

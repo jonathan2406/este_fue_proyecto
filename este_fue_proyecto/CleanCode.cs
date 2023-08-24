@@ -11,8 +11,6 @@ namespace este_fue_proyecto
 {
     internal class CleanCode
     {
-        Habitacion[,] matriz_vieja_trabajador;
-        Habitacion[,] backup_matriz;
         protected List<Remodelador> lista_remodeladores = new List<Remodelador> ();
         int numero_trabajadores;
         
@@ -31,7 +29,6 @@ namespace este_fue_proyecto
             for (int i = 0; i < numero_trabajadores; i++)
             {
                 Remodelador remodelador_i = new Remodelador($"remodelador_{i}");
-                remodelador_i.hora_ocupacion = DateTime.Now;
                 meter_lista_trabajadores(remodelador_i);
             }
         }
@@ -39,43 +36,29 @@ namespace este_fue_proyecto
         {
             return lista_remodeladores;
         }
-        
-        Remodelador coger_remodelador_desocupado()
+
+        public void imprimir_lista_trabajadores()
         {
             foreach (Remodelador iteracion in lista_remodeladores)
             {
-                if (DateTime.Compare(iteracion.hora_ocupacion,DateTime.Now) <  0)
-                {
-                    return iteracion;
-                }
-                else
-                {
-                    return null;
-                }
+                Console.WriteLine($"remodelador imprimir = {iteracion.Nombre}");
             }
-            return null;
         }
-
-        public void MostrarMatriz_trabajador()
+        
+        public List<Remodelador> coger_remodelador_desocupado()
         {
-            for (int i = 0; i < matriz_vieja_trabajador.GetLength(0); i++)
+            List<Remodelador> lista_desocupados = new List<Remodelador> { };
+            for (int i = 0; i < numero_trabajadores; i++)
             {
-                for (int j = 0; j < matriz_vieja_trabajador.GetLength(1); j++)
+                if (lista_remodeladores[i].verificar_disponibilidad_trabajador() == true)
                 {
-                    if (matriz_vieja_trabajador[i, j] != null)
-                    {
-                        Console.Write(matriz_vieja_trabajador[i, j].Nombre + " ");
-                    }
-                    else
-                    {
-                        Console.Write("Vacío! ");
-                    }
+                    lista_desocupados.Add(lista_remodeladores[i]);
                 }
-                Console.WriteLine();
             }
-            Console.WriteLine();
+            return lista_desocupados;
+                
         }
-        public void menu(Casa casa, Habitante persona_solicitante)
+        /*public void menu(Casa casa, Habitante persona_solicitante)
         {
             Console.WriteLine("Plano de la casa actual: ");
             Console.WriteLine("-------------------------------------------------------------------------------------");
@@ -253,6 +236,6 @@ namespace este_fue_proyecto
 
                 }
             }
-        }
+        }*/
     }
 }

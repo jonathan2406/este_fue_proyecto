@@ -41,7 +41,7 @@ namespace este_fue_proyecto
         }
 
         public void SetCosto(double nuevoCosto)
-        {
+        {   
             costo = nuevoCosto;
         }
     }

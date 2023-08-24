@@ -132,7 +132,7 @@ namespace este_fue_proyecto
                     for (int i = 0; i < lista_remodeladores.Count; i++)
                     {
                         Remodelador resultado = coger_remodelador_desocupado();
-                        Console.WriteLine($"-- El resultado de desocupado es: {resultado}");
+                        Console.WriteLine($"-- El resultado de desocupado es: {resultado.Nombre}");
                         if (resultado == null)
                         {
                             casa.set_matriz(matriz_vieja_trabajador);

@@ -112,6 +112,7 @@ namespace este_fue_proyecto
 
         public void reparar_habitacion(Habitacion habitacion, Habitante habitante)
         {
+
             if (get_estado_ocupacion())
             {
                 Console.WriteLine("El remodelador está ocupado en otra tarea");
@@ -131,6 +132,7 @@ namespace este_fue_proyecto
             if (mueblesPorArreglar.Count == 0)
             {
                 Console.WriteLine("Los muebles ya están reparados.");
+                estado_ocupacion = false;
                 return;
             }
 
@@ -146,36 +148,46 @@ namespace este_fue_proyecto
             int totalMueblesSeleccionados = 0;
             double costoTotalReparacion = 0;
             bool puedePagarTareas = true;
+            int tiempoEstimadoHoras = seleccionados.Length;
+
+
 
             foreach (string seleccionado in seleccionados)
             {
                 if (int.TryParse(seleccionado.Trim(), out int indice) && indice >= 1 && indice <= mueblesPorArreglar.Count)
                 {
                     Muebles muebleSeleccionado = mueblesPorArreglar[indice - 1];
-                    double costoReparacion = muebleSeleccionado.GetCosto() * 0.3;
-                    costoTotalReparacion += costoReparacion;
 
-                    if (puedePagarTareas && habitante.Dinero >= costoReparacion)
+                    
+                    costoTotalReparacion += 40000;
+
+                    
+
+                    if (puedePagarTareas && habitante.Dinero >= costoTotalReparacion)
                     {
-                        habitante.Pagar(costoReparacion);
+                        habitante.Pagar(40000);
                         muebleSeleccionado.SetEstado(true);
                         Console.WriteLine($"Se está arreglando el mueble: {muebleSeleccionado.Nombre}");
                         totalMueblesSeleccionados++;
+                    
                     }
-
+                   
                     else
                     {
                         Console.WriteLine($"El habitante {habitante.Nombre} no tiene suficiente dinero para pagar la reparación.");
                         puedePagarTareas = false;
                     }
-
+                    
                 }
                 else
                 {
-                    Console.WriteLine("No se arreglo ningún mueble.");
+                    Console.WriteLine("No se arregló ningún mueble.");
                 }
             }
-            
+            Console.WriteLine("-----------------------------------------------------------------------");
+            Console.WriteLine($"Tiempo estimado de trabajo en hora/s para reparar los muebles: {tiempoEstimadoHoras} horas y " +
+            $"{costoTotalReparacion}$");
+
             estado_ocupacion = false;
         }
 
@@ -243,12 +255,13 @@ namespace este_fue_proyecto
         }
         public void decorar_habitacion(Habitacion habitacion, Habitante habitante)
         {
+            double tiempoTotalDecoracion = 0;
             double costoTotalDecoracion = 0;
             List<Muebles> opcionesMuebles = new List<Muebles>
             {
                 new Lampara("Lampara de techo", 5000),
                 new Sofa("Sofa grande", 5000),
-                new Cama("Cama de agua", 2000),
+                new Cama("Cama de agua", 2000), 
                 new Lampara("Lampara de lava", 5000),
                 new Cama("Cama de matrimonio", 10000),
                 new Sofa("Sofa pequeño", 3000)
@@ -271,6 +284,8 @@ namespace este_fue_proyecto
             string inputMuebles = Console.ReadLine();
             string[] numerosMuebles = inputMuebles.Split(',');
             List<Muebles> mueblesElegidos = new List<Muebles>();
+            
+
 
             foreach (string numeroMueble in numerosMuebles)
             {
@@ -279,6 +294,8 @@ namespace este_fue_proyecto
                     Muebles muebleElegido = opcionesMuebles[indiceMueble - 1];
                     mueblesElegidos.Add(muebleElegido);
                     costoTotalDecoracion += muebleElegido.GetCosto();
+                    tiempoTotalDecoracion += 0.5;
+          
                 }
                 else
                 {
@@ -286,7 +303,11 @@ namespace este_fue_proyecto
                 }
             }
 
-            if (habitante.Pagar(costoTotalDecoracion))
+            double costoTotalTrabajadores = tiempoTotalDecoracion * 40000;
+            Console.WriteLine("-----------------------------------------------------------------------");
+            Console.WriteLine($"Tiempo estimado de decoración: {tiempoTotalDecoracion} hora/s y total de costo {costoTotalTrabajadores + costoTotalDecoracion}$.");
+
+            if (habitante.Pagar(costoTotalDecoracion + costoTotalTrabajadores))
             {
                 foreach (Muebles muebleElegido in mueblesElegidos)
                 {

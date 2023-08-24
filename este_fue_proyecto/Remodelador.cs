@@ -38,18 +38,59 @@ namespace este_fue_proyecto
         }
         public void añadir_habitacion(Casa casa, Habitante habitante, string nombreHabitacion, int fila, int columna, int metros)
         {
-            if (habitante.Dinero >= metros * 1.5)
+            double horasPorMetroCuadrado = 1.5;
+
+            double metrosCuadrados = metros;
+
+            double tiempoTotal = metrosCuadrados * horasPorMetroCuadrado;
+            int trabajadores = ((int)metrosCuadrados / 10) * 2;
+            tiempoTotal += trabajadores * horasPorMetroCuadrado;
+
+            double costoTotal = tiempoTotal * 40000;
+
+            if (habitante.Dinero < costoTotal)
             {
+                Console.WriteLine($"El habitante {habitante.Nombre} no tiene suficiente dinero para pagar el trabajo de remodelación.");
+                return;
+            }
+            
+
+            DateTime localDate = DateTime.Now;
+            DateTime newDate = localDate.AddHours(1.5 * metrosCuadrados);
+            String[] cultureNames = { "es-CO" };
+
+            foreach (var cultureName in cultureNames)
+            {
+                var culture = new CultureInfo(cultureName);
+                Console.WriteLine("-----------------------------------------------------------------------");
+
+                Console.WriteLine("{0}:", culture.NativeName);
+
+                Console.WriteLine("-----------------------------------------------------------------------");
+
+                Console.WriteLine($"Tiempo estimado para acabar de añadir habitación: {tiempoTotal} hora/s");
+
                 Habitacion nuevaHabitacion = new Habitacion(nombreHabitacion, metros);
                 casa.ModificarValor(fila, columna, nuevaHabitacion);
-                habitante.Pagar(metros * 1.5);
-                Console.WriteLine($"Se añadió la habitación {nombreHabitacion} a la casa.");
+
+                habitante.Pagar(costoTotal);
+
+                Console.WriteLine("-----------------------------------------------------------------------");
+
+                Console.WriteLine($"Se añadió la habitación '{nombreHabitacion}' a la casa.");
+
+                Console.WriteLine("-----------------------------------------------------------------------");
+
+                Console.WriteLine("Los remodeladores terminaron de agregar la habitación a las: {0}, {1:G}",
+                                      newDate.ToString(culture), newDate.Kind);
+                Console.WriteLine("-----------------------------------------------------------------------");
+                Console.WriteLine($"Saldo de {habitante.Nombre}: {habitante.Dinero}");
+                Console.WriteLine($"TRABAJADORES: {trabajadores}");
+
             }
-            else
-            {
-                Console.WriteLine($"El habitante {habitante.Nombre} no tiene suficiente dinero para añadir la habitación.");
-            }
+
         }
+    
 
         public void reparar_habitacion(Habitacion habitacion, Habitante habitante)
         {

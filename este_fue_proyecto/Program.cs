@@ -25,13 +25,7 @@ namespace este_fue_proyecto
 
             Console.WriteLine($"El {cuarto.Nombre} tiene {cuarto.Area} metros cuadrados.");
             
-            
-            
-            remodelador1.calcular_tiempo_nueva_habitacion(cuarto, HabitanteMain);
-            
-            
-            Console.WriteLine(cuarto.lista_personas);
-            Console.WriteLine(cuarto.verificar_ocupacion());
+               
             Console.WriteLine($"Cantidad de personas en la habitación : {cuarto.Nombre}, {cuarto.lista_personas.Count}");
 
 

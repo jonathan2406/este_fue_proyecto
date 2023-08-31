@@ -195,7 +195,7 @@ namespace este_fue_proyecto
                     }
                 }    
             }
-            return (0, 0);
+            return (-1,-1);
         }
 
         public bool ampliar_habitacion(Habitacion habitacion_amplear,  double metros)
@@ -284,6 +284,27 @@ namespace este_fue_proyecto
             }
         }
 
+        public void eliminar_habitacion(int fila_encontrada, int columna_encontrada)
+        {
+            Habitacion habitacion_borrar = matriz[fila_encontrada, columna_encontrada];
+            Habitacion[,] matriz_cambiar = matriz;
+            for (int ñ = 0; ñ < matriz.GetLength(1); ñ++)
+            {
+                if (matriz[fila_encontrada, ñ] == habitacion_borrar && Trabajar_trabajant(fila_encontrada, ñ) == true)
+                {
+                    matriz_cambiar[fila_encontrada, ñ] = null;
+                }
+                else
+                {
+                    Console.WriteLine("no se puede hacer esta accion");
+                    return;
+                }
+            }
+            Console.WriteLine("se elimino la habitacion");
+            matriz = matriz_cambiar;
+            matriz_vieja = matriz_cambiar;
+
+        }
 
         public bool Trabajar_trabajant(int fila, int columna)
         {
